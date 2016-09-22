@@ -1,0 +1,7 @@
+
+#Ignoramos todo el contenido de la carpeta Fuente debido a contener data confidencial 
+Fuente/
+#Ignoramos todos los archivo log
+*.log
+#Ignoramos los archivos pyc
+*.pyc
