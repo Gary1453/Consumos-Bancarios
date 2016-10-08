@@ -5,37 +5,35 @@ class Tarjeta():
 
 	"""Clase que representa las tarjetas de un cliente """
 
-	tipoTarjeta = ''
-	marca = ''
-	tipo  = ''
-	parque = ''
-	programa = ''
-	fechaAltaCuenta = ''
-	fechaAltaTarjeta = ''
+	tipoTarjeta = 0
+	prioridad=0
+	programa = 0
+	cantidad=0	
 	lineaCredito  = 0.0
-	mesIdExpiracion = ''
 
 	
-	def __init__( self, numeroCuenta , numeroTarjeta  ):
+	def __init__( self,  programa , cantidad , prioridad , lineaCredito ):
 
-		self.numeroCuenta = numeroCuenta
-		self.numeroTarjeta = numeroTarjeta
+		self.programa=programa
+		self.cantidad=cantidad
+		self.prioridad = prioridad
+		self.lineaCredito=lineaCredito
 
 
 class Consumo():
 
 	"""" Clase que representa los consumos realizados por un cliente """
 
-	def __init__( self , mesId , descripcion , canal , tipo , familia , subFamilia , producto , importeSoles ):
+	def __init__( self , mesId ,  familia , recencia , frecuencia , importeSoles , saldoPasivo ,  valorCorriente ):
 
 		self.mesId = mesId
-		self.descripcion = descripcion
 		self.importeSoles = importeSoles
-		self.canal = canal
-		self.tipo = tipo
 		self.familia = familia
-		self.subFamilia = subFamilia
-		self.producto = producto	
+		self.recencia=recencia
+		self.frecuencia=frecuencia
+		self.saldoPasivo=saldoPasivo
+		self.valorCorriente=valorCorriente
+
 
 
 
@@ -47,7 +45,7 @@ class Cliente():
 	ingresoBruto = 0.0
 	situacionLaboral = ''
 	nivelServicio = ''
-	rentabilidad = ''
+	rentabilidad = 0
 	hip = 0,
 	libDis = 0
 	tarCred = 0

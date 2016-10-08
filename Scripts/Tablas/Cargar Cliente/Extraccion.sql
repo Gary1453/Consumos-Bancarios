@@ -70,7 +70,8 @@ SaludVidaSeg Varchar2(4000),
 Castigado Varchar2(4000),
 Fallecido Varchar2(4000),
 Productos Varchar2(4000),
-Gestionable Varchar2(4000) 
+Gestionable Varchar2(4000) ,
+SaldoCorTotPas Varchar2(4000)
 
 )
 

@@ -35,11 +35,6 @@ imax = np.concatenate( ( inputs.max( axis=0 ) * np.ones( ( 1 , cant + 1 ) ), inp
 inputs[:,:cant ] = inputs[:,:cant ] / imax [ : cant ]
 print inputs[0:5,:]
 
-#Duracion 
-
-duracion = round( ( time.time() - start) / 60 , 2 )
-print( "Duracion : " + str(duracion) + " minutos")
-
 
 #Definimos nuestros valores objetivos 
 # Para esta simulacion seran solo 2 ( 1 o 0 )
@@ -73,3 +68,8 @@ testt = target[ 3::4 ]
 net = mlp.mlp(train,traint,5,outtype='softmax')
 net.earlystopping(train,traint,valid,validt,0.1)
 net.confmat(test,testt)
+
+#Duracion 
+
+duracion = round( ( time.time() - start) / 60 , 2 )
+print( "Duracion : " + str(duracion) + " minutos")

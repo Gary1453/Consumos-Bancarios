@@ -59,13 +59,13 @@ def obtener_consumos( conn , clienteId ):
 
 	consumos = []
 	cur = conn.cursor()
-	sql = "Select * from natan.gc_consumos where clienteId = :clienteId"
+	sql = "Select * from natan.rn_consumos where clienteId = :clienteId"
 	cur.execute( sql , { 'clienteId' : clienteId} )
 	res = cur.fetchall()
 
 	for r in res:
 
-		consumo = clases.Consumo( r[0] , r[2] , r[7] , r[3] , r[4] , r[5] ,r[6] ,r[8] )
+		consumo = clases.Consumo( r[1] , r[2] , r[3] , r[4] , r[5] ,r[6] , r[7] )			
 		consumos.append( consumo )		
 
 	cur.close()
@@ -76,13 +76,21 @@ def obtener_tarjetas( conn , clienteId ):
 
 	tarjetas = []
 	cur = conn.cursor()
-	sql = "Select * from natan.gc_tarjetas where clienteId = :clienteId"
+	sql="Select "
+	sql+= " sum(Programa) as Programa,"
+	sql+= " sum(Cantidad) as Cantidad,"
+	sql+= " avg(Cantidad * Prioridad) as Prioridad,"
+	sql+= " sum(LineaCredito) as LineaCredito "
+	sql+= " from natan.rn_tarjetas "
+	sql+= " where clienteId = :clienteId"
+	sql+= " group by clienteid"
+
 	cur.execute( sql , { 'clienteId' : clienteId} )
 	res = cur.fetchall()
 
 	for r in res:
 
-		tarjeta = clases.Tarjeta( r[2] , r[3] )
+		tarjeta = clases.Tarjeta( r[0] , r[1] , r[2] , r[3]  )	
 		tarjetas.append( tarjeta )		
 
 	cur.close()
@@ -95,15 +103,19 @@ Mostramos el tiempo de procesamiento y cerramos la conexion
 
 """
 
-"""
 
-a=obtener_clientes()[10]
+"""
+a=obtener_clientes()[15]
 print(a.edad)
+print a.numeroDocumento
 print(a.clienteId)
-print(a.consumos[10].canal)
-print(a.tarjetas[1].numeroCuenta)
-
+print(a.consumos[5].importeSoles)
+print(a.consumos[5].valorCorriente)
+print(a.consumos[5].mesId)
+print(a.tarjetas[0].lineaCredito)
+print(a.tarjetas[0].prioridad)
 """
+
 
 #conn.close()
 

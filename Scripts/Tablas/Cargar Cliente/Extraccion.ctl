@@ -56,7 +56,8 @@ Saludvidaseg,
 Castigado,
 Fallecido,
 Productos,
-Gestionable
+Gestionable,
+SaldoCorTotPas
 
 )
 
