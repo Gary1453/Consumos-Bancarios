@@ -115,8 +115,21 @@ print(a.consumos[5].mesId)
 print(a.tarjetas[0].lineaCredito)
 print(a.tarjetas[0].prioridad)
 """
+"""
+arreglo=obtener_clientes()
 
+for a in arreglo:
 
+	print(a.edad)
+	print a.numeroDocumento
+	print(a.clienteId)
+	print(a.consumos[0].importeSoles)
+	print(a.consumos[0].valorCorriente)
+	print(a.consumos[0].mesId)
+	print(a.tarjetas[0].lineaCredito)
+	print(a.tarjetas[0].prioridad)
+
+"""
 #conn.close()
 
 

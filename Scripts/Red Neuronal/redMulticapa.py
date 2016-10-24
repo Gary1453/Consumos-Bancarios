@@ -3,6 +3,14 @@ import numpy as np
 import mlp
 import time 
 
+#Algunas funciones de apoyo 
+
+def nvl( valor1 , valor2 ):
+	
+	if valor1 is None :
+		valor1 = valor2
+
+	return valor1		
 
 #Valores de Inicio
 
@@ -15,8 +23,20 @@ temp=[]
 
 for cliente in baseInicial:
 
-	temp = [ cliente.edad , int( cliente.ingresoBruto ) , int( cliente.mil ) ]
-	inputs.append( temp )
+	try:
+
+		varInp1 = cliente.tarjetas[0].lineaCredito
+		varInp2 = int( cliente.ingresoBruto ) 
+		varTar1 = int( cliente.mil , 0 ) 
+	
+	except IndexError:
+	
+		print('An error ocurred')
+	
+	finally:
+
+		temp = [ nvl( varInp1 , 0 ), varInp2 , varTar1  ]
+		inputs.append( temp )
 
 
 #Valores de Entrada 
@@ -24,7 +44,7 @@ for cliente in baseInicial:
 inputs=np.array(inputs)
 print inputs[ 0:5 , : ]  
 
-#Cantidad de velores  de entrada 
+#Cantidad de valores  de entrada 
 
 cant = np.ndim( inputs )
 
