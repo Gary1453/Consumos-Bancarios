@@ -34,9 +34,13 @@ for cliente in baseInicial:
   #for consumos in cliente.consumos:
 
 	try:
-
-		varInp1 = cliente.tarjetas[0].lineaCredito
-		varInp2 = int( cliente.ingresoBruto ) 
+		varInp1 = int( cliente.tarjetas[0].lineaCredito )	    
+		varInp2 = int( cliente.tarjetas[0].cantidad )
+		varInp3 = int( cliente.tarjetas[0].programa )
+		varInp4 = int( cliente.ingresoBruto ) 
+		varInp5 = int( cliente.rentabilidad )
+		varInp6 = int( cliente.saldoCortotPlan )
+		varInp7 = int( cliente.productos )
 		varTar1 = int( cliente.mil , 0 ) 
 
 		#Generamos el log 
@@ -45,7 +49,12 @@ for cliente in baseInicial:
 		archivo.write( "\n")
 		archivo.write( " Cliente : Cliente Numero " + str( numero) + "\n")
 		archivo.write( " Linea de Credito  : " + str( nvl ( varInp1 , 0  )  ) + "\n")
-		archivo.write( " IngresoBruto  : " + str( varInp2 ) + "\n")
+		archivo.write( " Cantidad  : " + str( varInp2 ) + "\n")
+		archivo.write( " Programa  : " + str( varInp3 ) + "\n")
+		archivo.write( " IngresoBruto  : " + str( varInp4 ) + "\n")
+		archivo.write( " Rentabilidad  : " + str( varInp5 ) + "\n")
+		archivo.write( " SaldoCortotPlan  : " + str( varInp6 ) + "\n")
+		archivo.write( " Productos  : " + str( varInp7 ) + "\n")
 		archivo.write( " ValorObjetivo  : " + str( varTar1 ) + "\n")
 		archivo.write( "\n")
 		archivo.close()
@@ -57,7 +66,11 @@ for cliente in baseInicial:
 	
 	finally:
 
-		temp = [ nvl( varInp1 , 0 ), varInp2 , varTar1  ]
+		temp = [ 
+				 nvl( varInp1 , 0 ) , nvl( varInp2 , 0 ) , nvl( varInp3 , 0 ) , varInp4 ,
+				 varInp5 , varInp6 , varInp7 , varTar1  
+			   ]
+
 		inputs.append( temp )
 		numero = numero + 1
 
@@ -69,19 +82,22 @@ inputs = np.array(inputs)
 #print inputs[ 0:5 , : ]  
 
 #Cantidad de valores  de entrada 
+# Se disminuye uno , debido a que se cuenta solo con un valor objetivo
 
-cant = np.ndim( inputs )
+cant = np.shape( inputs )[1] -1
 
 #Normalizacion de la informacion 
 
 inputs[ : , :cant ] = inputs[ : , :cant ] - inputs[ : , :cant ].mean(axis=0)
+#print(inputs[0:5,:])
 imax = np.concatenate( ( inputs.max( axis=0 ) * np.ones( ( 1 , cant + 1 ) ), inputs.min(axis=0) * np.ones((1,cant + 1 ) ) ),axis=0).max(axis=0)
+#print(imax [ : cant ])
 inputs[:,:cant ] = inputs[:,:cant ] / imax [ : cant ]
-print inputs[0:5,:]
+#print inputs[0:5,:]
 
 
 #Definimos nuestros valores objetivos 
-# Para esta simulacion seran solo 2 ( 1 o 0 )
+# Para esta simulacion seran 3 valores
 
 target = np.zeros( ( np.shape ( inputs )[0] , 3 ) );
 indices = np.where ( inputs[:, cant ] == 0 ) 
