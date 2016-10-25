@@ -281,13 +281,13 @@ RedNeur.Recencia * RedNeur.Frecuencia *  RedNeur.ImporteSoles * RedNeur.SaldoCor
 ( case 
 
   when ( RedNeur.Recencia * RedNeur.Frecuencia *  RedNeur.ImporteSoles * RedNeur.SaldoCorTotPas  )
-         between 1 and 35 then upper( 'Low')
+         between 1 and 35 then 0   --upper( 'Low')
 
   when ( RedNeur.Recencia * RedNeur.Frecuencia *  RedNeur.ImporteSoles * RedNeur.SaldoCorTotPas  ) 
-         between 36 and 80 then upper ( 'Moderate' )
+         between 36 and 80 then 1  --upper ( 'Moderate' )
 
   when ( RedNeur.Recencia * RedNeur.Frecuencia *  RedNeur.ImporteSoles * RedNeur.SaldoCorTotPas  ) 
-         between 81 and 144 then upper ( 'High Value' )
+         between 81 and 144 then 2 --upper ( 'High Value' )
 
  end ) as RangoValorCorriente 
 
